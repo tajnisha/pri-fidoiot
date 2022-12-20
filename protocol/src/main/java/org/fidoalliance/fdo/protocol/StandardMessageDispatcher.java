@@ -1010,7 +1010,7 @@ public class StandardMessageDispatcher implements MessageDispatcher {
     PublicKey owner1 = cs.decodeKey(oldHeader.getPublicKey());
     PublicKey owner2 = cs.decodeKey(setupDevice.getOwner2Key());
     KeyResolver resolver = null;
-    if (owner2.equals(owner1)) {
+    if (owner2.equals(owner1) && guid.equals(guid2) && getWorker(CredReuseFunction.class).apply(true)) {
       resolver = getWorker(OwnerKeySupplier.class).get();
       setupDevice.setOwner2Key(VoucherUtils.getLastOwner(voucher));
     } else {
